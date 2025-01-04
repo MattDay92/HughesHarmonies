@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h4,
+h5 {
+    font-size: small;
+}
+
+h4 {
+    color: rgb(249, 248, 22)
+}
+
+
+
+/* -----------------------------NAV------------------------------- */
+
+nav {
+    background: rgb(62, 17, 78);
+    height: 10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+nav img {
+    height: 100%;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 40vw;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+}
+
+/* -----------------------------FOOTER------------------------------ */
+
+footer {
+    height: 25vh;
+    background: rgb(90, 33, 100);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+
+footer div {
+    width: 25vw;
+}

@@ -1,0 +1,70 @@
+.about-page {
+    min-height: 100vh;
+}
+
+.about-hero-container {
+    height: 60vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    color: white;
+    text-align: center;
+    background:rgb(62, 17, 78)
+  }
+
+/* --------------------------------ABOUT JERICO---------------------------------- */
+
+.about-jerico {
+    min-height: 100vh;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 40vw;
+    margin: auto;
+}
+
+.about-jerico img {
+    border-radius: 50%;
+    width: 50%;
+    margin-bottom: 2vh;
+}
+
+.about-jerico div {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+/* -----------------------------------FAQ-------------------------------------- */
+
+.about-FAQ {
+    width: 70vw;
+    margin: auto;
+    margin-top: 10vh;
+    margin-bottom: 20vh;
+}
+
+.about-FAQ h2 {
+    text-align: center;
+}
+
+.accordion-button {
+    background-color: #3e114e; 
+    color: white; 
+    text-decoration: none;
+}
+
+.accordion-button:focus, .accordion-button:active {
+    background-color: #300d3d;
+    box-shadow: 0 0 10px 2px rgba(62, 17, 78, 0.75); 
+    outline: none; 
+}
+
+/* Style for the open (non-collapsed) state */
+.accordion-button:not(.collapsed) {
+    background-color: #5c2a6b; /* Purple color */
+    color: white; /* Ensure text stays white for contrast */
+}
