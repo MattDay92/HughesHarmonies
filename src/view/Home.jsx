@@ -48,7 +48,8 @@ export default function Home() {
                         </div>
                         <div>
                             <h4>Kelly Cassady Day</h4>
-                            <h5>Choir Director - Franklin Community High School</h5>
+                            <h5>Choir Director</h5>
+                            <h5>Franklin Community High School</h5>
                         </div>
                     </div>
                 </div>
@@ -64,7 +65,8 @@ export default function Home() {
                         </div>
                         <div>
                             <h4>Jason David</h4>
-                            <h5>Choir Director - Ben Davis High School</h5>
+                            <h5>Choir Director</h5>
+                            <h5>Ben Davis High School</h5>
                         </div>
                     </div>
                 </div>
@@ -76,7 +78,8 @@ export default function Home() {
                         </div>
                         <div>
                             <h4>Matt Day</h4>
-                            <h5>Not a Choir Director - Franklin</h5>
+                            <h5>Not a Choir Director</h5>
+                            <h5>Franklin Community High School</h5>
                         </div>
                     </div>
                 </div>
@@ -85,19 +88,19 @@ export default function Home() {
             <div className='pricing'>
                 <div className='pricing-box-1'>
                     <h3>Stock w/ Adjustments</h3>
-                    <div>$300 -$500</div>
+                    <div className='pricing-box-price'>$300 -$500</div>
                     <div>Anything from our vast library of arrangements can be customized to fit your needs</div>
                     <button className='btn btn-warning'>Contact</button>
                 </div>
                 <div className='pricing-box-2'>
                     <h3>Stock w/ Adjustments</h3>
-                    <div>$300 -$500</div>
+                    <div className='pricing-box-price'>$300 -$500</div>
                     <div>Anything from our vast library of arrangements can be customized to fit your needs</div>
                     <button className='btn btn-warning'>Contact</button>
                 </div>
                 <div className='pricing-box-3'>
                     <h3>Stock w/ Adjustments</h3>
-                    <div>$300 -$500</div>
+                    <div className='pricing-box-price'>$300 -$500</div>
                     <div>Anything from our vast library of arrangements can be customized to fit your needs</div>
                     <button className='btn btn-warning'>Contact</button>
                 </div>

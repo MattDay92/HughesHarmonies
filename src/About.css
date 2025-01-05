@@ -4,6 +4,7 @@
 
 .about-hero-container {
     height: 60vh;
+    width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -12,6 +13,10 @@
     text-align: center;
     background:rgb(62, 17, 78)
   }
+
+.about-hero-container h1 {
+    font-size: 8vw;
+}
 
 /* --------------------------------ABOUT JERICO---------------------------------- */
 
