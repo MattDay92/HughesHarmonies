@@ -9,7 +9,7 @@ export default function Nav() {
                 <Link to={'/'}><img className='nav-logo' src={Logo} /></Link>
             </div>
             <div className='nav-links'>
-                <Link className='nav-link' to={'/'}>Stock Arrangements</Link>
+                <Link className='nav-link' to={'/stockarrangements'}>Stock Arrangements</Link>
                 <Link className='nav-link' to={'/about'}>About</Link>
             </div>
             <Link to={'/contact'} className='btn btn-warning'>Contact Us</Link>
