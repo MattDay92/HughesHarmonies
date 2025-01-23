@@ -43,3 +43,28 @@
 .hero-container h2 {
     color: rgb(249, 248, 22);
 }
+
+
+.card {
+    width: 20vw;
+    text-align: center;
+}
+
+.arrangements-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 70vw;
+    margin: auto;
+    margin-top: 10vh;
+}
+
+.stockarrangements-categories, .stockarrangements-tags {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 50vw;
+    margin: auto;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}

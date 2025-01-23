@@ -11,17 +11,21 @@ export default function Admin({data, setData, getItems}) {
 
   const addItem = async (event) => {
     event.preventDefault()
+
+    const categoriesArray = event.target.categories.value.split(',').map(item => item.trim()).filter(Boolean);
+    const tagsArray = event.target.tags.value.split(',').map(item => item.trim()).filter(Boolean);
+
     try {
-      const docRef = await addDoc(collection(db, "arrangements"), {
-        title: event.target.title.value,
-        categories: event.target.categories.value,
-        tags: event.target.tags.value,
-        excerpt: event.target.excerpt.value,
-        info: event.target.info.value,
-        // sampleIMG: sampleIMG,
-        // audioTrack: audioTrack
-      });
-      getItems()
+        const docRef = await addDoc(collection(db, "arrangements"), {
+            title: event.target.title.value,
+            categories: categoriesArray, // Store as an array
+            tags: tagsArray,             // Store as an array
+            excerpt: event.target.excerpt.value,
+            info: event.target.info.value,
+            // sampleIMG: sampleIMG,
+            // audioTrack: audioTrack
+        });
+        getItems();
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
