@@ -59,7 +59,7 @@
     margin-top: 10vh;
 }
 
-.stockarrangements-categories, .stockarrangements-tags {
+.stockarrangements-categories, .stockarrangements-tags, .stockarrangements-showall {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -67,4 +67,18 @@
     margin: auto;
     margin-top: 3vh;
     margin-bottom: 3vh;
+}
+
+.stockarrangements-showall {
+    justify-content: center !important;
+}
+
+.arrangement-card-link {
+    text-decoration: none;
+    color: black;
+}
+
+.arrangement-card-link:hover {
+    text-decoration: none;
+    color: rgb(190, 190, 2);
 }

@@ -64,7 +64,7 @@ export default function Admin({data, setData, getItems}) {
         <label for='excerpt' className="form-label">Excerpt</label>
         <input className='form-control' id='excerpt' name='excerpt' />
         <label for='info' className="form-label">Info</label>
-        <input className='form-control' id='info' name='info' />
+        <textarea className='form-control' id='info' value='info' name='info' rows="8" />
         <button type='submit' className='btn btn-primary'>Submit</button>
       </form>
 

@@ -10,6 +10,7 @@ import About from './view/About'
 import Contact from './view/Contact'
 import Admin from './view/Admin'
 import StockArrangements from './view/StockArrangements'
+import SinglePage from './view/SinglePage.jsx';
 
 function App() {
 
@@ -20,11 +21,11 @@ function App() {
   const getItems = async () => {
     const q = query(collection(db, "arrangements"));
 
-    let items = {}
+    let items = []
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      items[doc.id] = doc.data()
+      items.push({ id: doc.id, ...doc.data() });
     });
     setData(items)
   }
@@ -33,24 +34,22 @@ function App() {
     let categoryList = []
     let tagList = []
 
+    console.log(data)
+
     for (let key in data) {
-      let categories = data[key].categories.includes(',')
-        ? data[key].categories.split(',').map(item => item.trim()).filter(Boolean)
-        : [data[key].categories];
+      let categories = Array.isArray(data[key].categories) ? data[key].categories : [data[key].categories];
 
       categories.forEach(category => {
         if (!categoryList.includes(category)) {
-          categoryList.push(category)
+          categoryList.push(category);
         }
       });
 
-      let tags = data[key].tags.includes(',')
-        ? data[key].tags.split(',').map(item => item.trim()).filter(Boolean)
-        : [data[key].tags];
+      let tags = Array.isArray(data[key].tags) ? data[key].tags : [data[key].tags];
 
       tags.forEach(tag => {
         if (!tagList.includes(tag)) {
-          tagList.push(tag)
+          tagList.push(tag);
         }
       });
     }
@@ -78,6 +77,7 @@ function App() {
           <Route path='/contact' element={<Contact />} />
           <Route path='/admin' element={<Admin data={data} setData={setData} getItems={getItems} />} />
           <Route path='/stockarrangements' element={<StockArrangements data={data} categories={categories} tags={tags} />} />
+          <Route path='/arrangement/:id' element={<SinglePage data={data} getItems={getItems} />} />
         </Routes>
         <Footer />
       </BrowserRouter>
