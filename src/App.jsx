@@ -12,7 +12,7 @@ import Admin from './view/Admin'
 import StockArrangements from './view/StockArrangements'
 import SinglePage from './view/SinglePage.jsx';
 
-function App() {
+function App({storage}) {
 
   const [data, setData] = useState({})
   const [categories, setCategories] = useState([])
@@ -75,7 +75,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='/admin' element={<Admin data={data} setData={setData} getItems={getItems} />} />
+          <Route path='/admin' element={<Admin data={data} setData={setData} getItems={getItems} storage={storage} />} />
           <Route path='/stockarrangements' element={<StockArrangements data={data} categories={categories} tags={tags} />} />
           <Route path='/arrangement/:id' element={<SinglePage data={data} getItems={getItems} />} />
         </Routes>

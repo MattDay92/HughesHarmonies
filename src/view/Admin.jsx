@@ -1,36 +1,94 @@
 import React, { useEffect, useState } from 'react'
 import '../Admin.css'
 import { collection, addDoc, query, where, getDocs, doc, deleteDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, uploadBytesResumable, uploadString, getDownloadURL } from 'firebase/storage'
 import { db } from "../main.jsx";
 import RichTextEditor from '../components/RichTextEditor.jsx';
 
 
 
-export default function Admin({data, setData, getItems}) {
+export default function Admin({ data, setData, getItems, storage }) {
+  const [fileUpload, setFileUpload] = useState('')
+  const [fileUploadName, setFileUploadName] = useState('')
+  const [fileDownload, setFileDownload] = useState('')
+
 
 
   const addItem = async (event) => {
     event.preventDefault()
 
-    const categoriesArray = event.target.categories.value.split(',').map(item => item.trim()).filter(Boolean);
+    let downloadURL = ""
+
+    const fileInput = event.target.elements["AudioUpload"]; 
+    const file = fileInput?.files[0];    if (file) {
+      try {
+        const metadata = {
+          contentType: file.type || "audio/mpeg", // Fallback MIME type
+        };
+  
+        const storageRef = ref(storage, `audio/${file.name}`);
+        const uploadTask = await uploadBytesResumable(storageRef, file, metadata);
+        downloadURL = await getDownloadURL(uploadTask.ref);
+  
+        console.log("File uploaded successfully:", downloadURL);
+      } catch (error) {
+        console.error("Error uploading file:", error);
+        return; // Stop execution if upload fails
+      }
+    }
+
+    // const categoriesArray = event.target.categories.value.split(',').map(item => item.trim()).filter(Boolean);
     const tagsArray = event.target.tags.value.split(',').map(item => item.trim()).filter(Boolean);
 
     try {
-        const docRef = await addDoc(collection(db, "arrangements"), {
-            title: event.target.title.value,
-            categories: categoriesArray, // Store as an array
-            tags: tagsArray,             // Store as an array
-            excerpt: event.target.excerpt.value,
-            info: event.target.info.value,
-            // sampleIMG: sampleIMG,
-            // audioTrack: audioTrack
-        });
-        getItems();
+      const docRef = await addDoc(collection(db, "arrangements"), {
+        title: event.target.title.value,
+        voicing: event.target.voicing.value, // Store as an array
+        difficulty: event.target.difficulty.value,
+        tags: tagsArray,             // Store as an array          
+        excerpt: event.target.excerpt.value,
+        description: event.target.description.value,
+        accompaniment: event.target.accompaniment.value,
+        price: event.target.price.value,
+        audioURL: downloadURL
+        // audioTrack: audioTrack
+      });
+      getItems();
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
   }
+
+  const uploadAudio = async (file) => {
+    if (!file) return null;
+
+    const metadata = {
+      contentType: file.type,  // Automatically detect file type
+    };
+
+    try {
+      const storageRef = ref(storage, `audio/${file.name}`);
+      const snapshot = await uploadBytesResumable(storageRef, file, metadata);
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      console.log("Audio uploaded:", downloadURL);
+      return downloadURL;  // Return the URL so it can be used in addItem
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      return null;
+    }
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0]; // Get the selected file
+    if (file) {
+      console.log("File Name:", file.name);
+      console.log("File Type:", file.type); // This contains the MIME type (e.g., "audio/mpeg")
+      console.log("File Size:", file.size);
+      uploadAudio(file);
+    }
+  };
+
 
   const removeItem = async (item) => {
     try {
@@ -41,6 +99,44 @@ export default function Admin({data, setData, getItems}) {
       console.error(`Error deleting item with key ${item}`, e)
     }
   }
+
+  const handleFileUpload = () => {
+    const filesRef = ref(storage, `files/${fileUploadName}`)
+
+    if (fileUpload) {
+      uploadString(filesRef, fileUpload, 'data_url').then((snapshot) => {
+        console.log('Uploaded a file!');
+      })
+    }
+
+    if (fileUploadName) {
+      downloadFile(fileUploadName)
+    }
+  }
+
+  const downloadFile = (name) => {
+    const gsReference = ref(storage, `gs://hughesharmonies.firebasestorage.app/files/${name}`)
+
+    getDownloadURL(gsReference)
+      .then((url) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = (event) => {
+          const link = xhr.responseURL
+          setFileDownload(link)
+          console.log('Ran Download')
+        };
+        xhr.open('GET', url);
+        xhr.send()
+      })
+      .catch((error) => {
+        console.log('ERROR Downloading File')
+      })
+  }
+
+
+  useEffect(() => {
+    handleFileUpload()
+  }, [fileUpload])
 
   useEffect(() => {
     getItems()
@@ -57,15 +153,30 @@ export default function Admin({data, setData, getItems}) {
         <h2 className='text-center'>Add New Arrangement</h2>
         <label for='title' className="form-label">Title</label>
         <input className='form-control' id='title' name='title' />
-        <label for='categories' className="form-label">Categories</label>
-        <input className='form-control' id='categories' name='categories' />
-        <label for='tags' className="form-label">Tags</label>
+        <label for='voicing' className="form-label">Voicing</label>
+        <input className='form-control' id='voicing' name='voicing' />
+        <label for='difficulty' className="form-label">Difficulty</label>
+        <input className='form-control' id='difficulty' name='difficulty' />
+        <label for='tags' className="form-label">Tags (Separated by Commas)</label>
         <input className='form-control' id='tags' name='tags' />
         <label for='excerpt' className="form-label">Excerpt</label>
         <input className='form-control' id='excerpt' name='excerpt' />
-        <label for='info' className="form-label">Info</label>
-        <textarea className='form-control' id='info' value='info' name='info' rows="8" />
+        <label for='description' className="form-label">Description</label>
+        <input className='form-control' id='description' name='description' />
+        <label for='accompaniment' className="form-label">Accompaniment</label>
+        <input className='form-control' id='accompaniment' name='accompaniment' />
+        <label for='price' className="form-label">Price</label>
+        <input className='form-control' id='price' name='price' />
+        <label for='AudioUpload' className='form-label'>Audio Upload</label>
+        <input type='file' name='AudioUpload' id='AudioUpload' />
+        <br />
         <button type='submit' className='btn btn-primary'>Submit</button>
+      </form>
+
+      <form className='admin-col' >
+        <h3>Test Photo #1</h3>
+        <div className='w-50 m-auto'><img className='w-100' id='TestPhoto1' src={fileDownload} /></div>
+        <input type='file' name='AudioFileTest' onChange={handleFileChange} />
       </form>
 
       {data ? (
@@ -85,10 +196,6 @@ export default function Admin({data, setData, getItems}) {
       ) : (
         <></>
       )}
-
-      <RichTextEditor />
-
-
 
     </div>
   )

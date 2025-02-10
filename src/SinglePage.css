@@ -2,4 +2,17 @@
     min-height: 100vh;
     text-align: center;
     margin-top: 10vh;
+    
+}
+
+.singlepage-left {
+    width: 40vw;
+}
+
+.singlepage-right {
+    width: 40vw;
+}
+
+.singlepageIMG {
+    width: 75%;
 }

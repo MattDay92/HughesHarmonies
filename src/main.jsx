@@ -4,6 +4,8 @@ import App from './App.jsx'
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from 'firebase/firestore';
+import { getStorage, ref } from "firebase/storage";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyA5mVo7FKNQ8oErs10IAJfZRAluryL5034",
@@ -16,11 +18,12 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const storage = getStorage(app)
 export const db = getFirestore(app);
 const analytics = getAnalytics(app);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <App storage={storage} />
   </StrictMode>,
 )

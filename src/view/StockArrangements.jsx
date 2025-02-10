@@ -142,7 +142,6 @@ export default function StockArrangements({ data, categories, tags }) {
                                         <div className="card-body">
                                             <h2>{value.title}</h2>
                                             <p>{value.excerpt}</p>
-                                            <p>{value.id}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +156,6 @@ export default function StockArrangements({ data, categories, tags }) {
                                     <div className="card-body">
                                         <h2>{value.title}</h2>
                                         <p>{value.excerpt}</p>
-                                        <p>{value.id}</p>
                                     </div>
                                 </div>
                             </div>
