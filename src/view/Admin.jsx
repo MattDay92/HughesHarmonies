@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import '../Admin.css'
 import { collection, addDoc, query, where, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, uploadBytesResumable, uploadString, getDownloadURL } from 'firebase/storage'
@@ -19,17 +20,17 @@ export default function Admin({ data, setData, getItems, storage }) {
 
     let downloadURL = ""
 
-    const fileInput = event.target.elements["AudioUpload"]; 
-    const file = fileInput?.files[0];    if (file) {
+    const fileInput = event.target.elements["AudioUpload"];
+    const file = fileInput?.files[0]; if (file) {
       try {
         const metadata = {
           contentType: file.type || "audio/mpeg", // Fallback MIME type
         };
-  
+
         const storageRef = ref(storage, `audio/${file.name}`);
         const uploadTask = await uploadBytesResumable(storageRef, file, metadata);
         downloadURL = await getDownloadURL(uploadTask.ref);
-  
+
         console.log("File uploaded successfully:", downloadURL);
       } catch (error) {
         console.error("Error uploading file:", error);
@@ -37,13 +38,15 @@ export default function Admin({ data, setData, getItems, storage }) {
       }
     }
 
-    // const categoriesArray = event.target.categories.value.split(',').map(item => item.trim()).filter(Boolean);
+    const voicingsArray = event.target.voicing.value.split(',').map(item => item.trim()).filter(Boolean);
     const tagsArray = event.target.tags.value.split(',').map(item => item.trim()).filter(Boolean);
+
+    console.log(voicingsArray)
 
     try {
       const docRef = await addDoc(collection(db, "arrangements"), {
         title: event.target.title.value,
-        voicing: event.target.voicing.value, // Store as an array
+        voicing: voicingsArray, // Store as an array
         difficulty: event.target.difficulty.value,
         tags: tagsArray,             // Store as an array          
         excerpt: event.target.excerpt.value,
@@ -51,7 +54,6 @@ export default function Admin({ data, setData, getItems, storage }) {
         accompaniment: event.target.accompaniment.value,
         price: event.target.price.value,
         audioURL: downloadURL
-        // audioTrack: audioTrack
       });
       getItems();
       console.log("Document written with ID: ", docRef.id);
@@ -187,7 +189,10 @@ export default function Admin({ data, setData, getItems, storage }) {
                 <div class="card-body">
                   <h2>{value.title}</h2>
                   <p>{value.excerpt}</p>
-                  <button onClick={() => removeItem(key)} className='btn btn-sm btn-danger'>Delete</button>
+                  <div className='d-flex justify-content-around'>
+                    <button onClick={() => removeItem(value.id)} className='btn btn-sm btn-danger'>Delete</button>
+                    <Link to={`/arrangement/edit/${value.id}`} className='btn btn-sm btn-primary'>Edit</Link>
+                  </div>
                 </div>
               </div>
             </div>

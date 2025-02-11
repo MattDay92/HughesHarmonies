@@ -5,7 +5,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '../main';
 import '../StockArrangements.css'
 
-export default function StockArrangements({ data, categories, tags }) {
+export default function StockArrangements({ data, voicings, tags }) {
 
     const [filtered, setFiltered] = useState(null)
     const [filteredName, setFilteredName] = useState(null)
@@ -44,7 +44,7 @@ export default function StockArrangements({ data, categories, tags }) {
         }
     }
 
-    const filterItemsByCategory = async (filter) => {
+    const filterItemsByVoicing = async (filter) => {
         if (!filter) {
             console.error("No filter provided");
             return;
@@ -57,7 +57,7 @@ export default function StockArrangements({ data, categories, tags }) {
         const itemRef = collection(db, "arrangements");
 
         try {
-            const q = query(itemRef, where("categories", "array-contains", filter));
+            const q = query(itemRef, where("voicing", "array-contains", filter));
 
             let filteredList = []
 
@@ -93,13 +93,13 @@ export default function StockArrangements({ data, categories, tags }) {
 
             <div>
 
-                {categories ? (
+                {voicings ? (
                     <div className='stockarrangements-categories'>
-                        {categories.map((x, index) => {
+                        {voicings.map((x, index) => {
                             let btnClass = x === filteredName ? 'btn-warning-darker' : 'btn-warning';
                             return (
                                 <div key={index}>
-                                    <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByCategory(x)}>
+                                    <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByVoicing(x)}>
                                         {x}
                                     </button>
                                 </div>

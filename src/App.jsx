@@ -11,11 +11,12 @@ import Contact from './view/Contact'
 import Admin from './view/Admin'
 import StockArrangements from './view/StockArrangements'
 import SinglePage from './view/SinglePage.jsx';
+import SinglePageEdit from './view/SinglePageEdit.jsx';
 
 function App({storage}) {
 
   const [data, setData] = useState({})
-  const [categories, setCategories] = useState([])
+  const [voicings, setVoicings] = useState([])
   const [tags, setTags] = useState([])
 
   const getItems = async () => {
@@ -30,18 +31,18 @@ function App({storage}) {
     setData(items)
   }
 
-  const getCategoriesAndTags = () => {
-    let categoryList = []
+  const getVoicingsAndTags = () => {
+    let voicingList = []
     let tagList = []
 
     console.log(data)
 
     for (let key in data) {
-      let categories = Array.isArray(data[key].categories) ? data[key].categories : [data[key].categories];
+      let voicings = Array.isArray(data[key].voicing) ? data[key].voicing : [data[key].voicing];
 
-      categories.forEach(category => {
-        if (!categoryList.includes(category)) {
-          categoryList.push(category);
+      voicings.forEach(voicing => {
+        if (!voicingList.includes(voicing)) {
+          voicingList.push(voicing);
         }
       });
 
@@ -54,7 +55,7 @@ function App({storage}) {
       });
     }
 
-    setCategories(categoryList)
+    setVoicings(voicingList)
     setTags(tagList)
   }
 
@@ -64,7 +65,7 @@ function App({storage}) {
   }, [])
 
   useEffect(() => {
-    getCategoriesAndTags()
+    getVoicingsAndTags()
   }, [data])
 
   return (
@@ -76,8 +77,9 @@ function App({storage}) {
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/admin' element={<Admin data={data} setData={setData} getItems={getItems} storage={storage} />} />
-          <Route path='/stockarrangements' element={<StockArrangements data={data} categories={categories} tags={tags} />} />
+          <Route path='/stockarrangements' element={<StockArrangements data={data} voicings={voicings} tags={tags} />} />
           <Route path='/arrangement/:id' element={<SinglePage data={data} getItems={getItems} />} />
+          <Route path='/arrangement/edit/:id' element={<SinglePageEdit data={data} getItems={getItems} storage={storage} />} />
         </Routes>
         <Footer />
       </BrowserRouter>
