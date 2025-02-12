@@ -1,16 +1,17 @@
 .singlepage-fullpage {
     min-height: 100vh;
     text-align: center;
-    margin-top: 10vh;
-    
+    margin-top: 10vh; 
 }
 
 .singlepage-left {
     width: 40vw;
+    margin-top: 10vh;
 }
 
 .singlepage-right {
     width: 40vw;
+    margin-top: 10vh;
 }
 
 .singlepageIMG {

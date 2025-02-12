@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import '../SinglePage.css'
 import { useParams } from 'react-router-dom'
 import { collection, query, where, getDocs, getDoc, doc } from "firebase/firestore";
@@ -36,7 +37,7 @@ export default function SinglePage({ data, getItems }) {
             <h1>{arrangement.title}</h1>
             <div className='d-flex justify-content-around'>
                 <div className='singlepage-left'>
-                    <img className='singlepageIMG' src='https://firebasestorage.googleapis.com/v0/b/triangleasphalt-4b0f2.firebasestorage.app/o/files%2FTestPhoto1?alt=media&token=a3149957-4888-4276-806f-209c6da406a5' />
+                    <img className='singlepageIMG' src={arrangement.photoURL} />
                     <audio controls>
                         <source src={arrangement.audioURL} type="audio/mpeg" />
                             Your browser does not support the audio element.
@@ -55,7 +56,7 @@ export default function SinglePage({ data, getItems }) {
                     <p>{arrangement.price}</p>
                 </div>
             </div>
-            <p>{arrangement.info}</p>
+            <Link to={'/contact'} className='btn btn-warning' target='_blank'>Purchase</Link>
         </div>
     )
 }

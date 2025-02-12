@@ -1,5 +1,6 @@
 .admin {
     min-height: 100vh;
+    padding-top: 5vh;
 }
 
 .card {
@@ -9,7 +10,21 @@
 
 .admin-arrangements {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-wrap: wrap;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
 }
 
+.add-arrangement {
+    width: 75%;
+    margin: auto;
+    text-align: center;
+    margin-top: 5vh;
+}
+
+.add-arrangement input {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}

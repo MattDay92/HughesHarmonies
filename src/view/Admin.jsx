@@ -18,10 +18,10 @@ export default function Admin({ data, setData, getItems, storage }) {
   const addItem = async (event) => {
     event.preventDefault()
 
-    let downloadURL = ""
+    let audioDownloadURL = ""
 
-    const fileInput = event.target.elements["AudioUpload"];
-    const file = fileInput?.files[0]; if (file) {
+    const audioInput = event.target.elements["AudioUpload"];
+    const file = audioInput?.files[0]; if (file) {
       try {
         const metadata = {
           contentType: file.type || "audio/mpeg", // Fallback MIME type
@@ -29,9 +29,27 @@ export default function Admin({ data, setData, getItems, storage }) {
 
         const storageRef = ref(storage, `audio/${file.name}`);
         const uploadTask = await uploadBytesResumable(storageRef, file, metadata);
-        downloadURL = await getDownloadURL(uploadTask.ref);
+        audioDownloadURL = await getDownloadURL(uploadTask.ref);
 
-        console.log("File uploaded successfully:", downloadURL);
+        console.log("File uploaded successfully:", audioDownloadURL);
+      } catch (error) {
+        console.error("Error uploading file:", error);
+        return; // Stop execution if upload fails
+      }
+    }
+
+    let photoDownloadURL = ""
+
+    const photoInput = event.target.elements["PhotoUpload"];
+    const photoFile = photoInput?.files[0]; if (photoFile) {
+      try {
+        
+
+        const storageRef = ref(storage, `images/${photoFile.name}`);
+        const uploadTask = await uploadBytes(storageRef, photoFile);
+        photoDownloadURL = await getDownloadURL(uploadTask.ref);
+
+        console.log("File uploaded successfully:", photoDownloadURL);
       } catch (error) {
         console.error("Error uploading file:", error);
         return; // Stop execution if upload fails
@@ -53,7 +71,8 @@ export default function Admin({ data, setData, getItems, storage }) {
         description: event.target.description.value,
         accompaniment: event.target.accompaniment.value,
         price: event.target.price.value,
-        audioURL: downloadURL
+        audioURL: audioDownloadURL,
+        photoURL: photoDownloadURL
       });
       getItems();
       console.log("Document written with ID: ", docRef.id);
@@ -151,7 +170,7 @@ export default function Admin({ data, setData, getItems, storage }) {
   return (
     <div className='admin'>
       <h1 className='text-center'>Admin Page</h1>
-      <form className='w-75 m-auto' onSubmit={addItem} name='title' >
+      <form className='add-arrangement' onSubmit={addItem} name='title' >
         <h2 className='text-center'>Add New Arrangement</h2>
         <label for='title' className="form-label">Title</label>
         <input className='form-control' id='title' name='title' />
@@ -170,15 +189,14 @@ export default function Admin({ data, setData, getItems, storage }) {
         <label for='price' className="form-label">Price</label>
         <input className='form-control' id='price' name='price' />
         <label for='AudioUpload' className='form-label'>Audio Upload</label>
+        <br />
         <input type='file' name='AudioUpload' id='AudioUpload' />
         <br />
+        <label for='PhotoUpload' className='form-label'>Photo Upload</label>
+        <br />
+        <input type='file' name='PhotoUpload' id='PhotoUpload' />
+        <br />
         <button type='submit' className='btn btn-primary'>Submit</button>
-      </form>
-
-      <form className='admin-col' >
-        <h3>Test Photo #1</h3>
-        <div className='w-50 m-auto'><img className='w-100' id='TestPhoto1' src={fileDownload} /></div>
-        <input type='file' name='AudioFileTest' onChange={handleFileChange} />
       </form>
 
       {data ? (
