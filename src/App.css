@@ -36,6 +36,10 @@ nav {
     justify-content: space-around;
     align-items: center;
     margin-bottom: 0;
+    font-family: "Permanent Marker";
+    font-weight: 400;
+    font-size: larger;
+    font-style: normal;
 }
 
 .nav-logo {
@@ -92,4 +96,15 @@ footer {
 
 footer div {
     width: 25vw;
+}
+
+.social-icons .btn {
+    width: 70px;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: white;
+}
+
+.social-icons img {
+    width: 100%;
 }

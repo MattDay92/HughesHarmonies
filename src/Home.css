@@ -92,7 +92,7 @@
   display: flex;
   flex-direction: column;
 
-  height: 30vh;
+  height: 40vh;
   width: 70vw;
   background: black;
   color: white;
@@ -274,4 +274,8 @@
   font-weight: 400;
   font-style: normal;
   font-size: 2.5rem;
+}
+
+.pricing button {
+  margin-top: 2vh;
 }

@@ -1,7 +1,7 @@
 .singlepage-fullpage {
     min-height: 100vh;
     text-align: center;
-    margin-top: 10vh; 
+    margin-top: 10vh;
 }
 
 .singlepage-left {
@@ -14,6 +14,41 @@
     margin-top: 10vh;
 }
 
-.singlepageIMG {
-    width: 75%;
+.singlepageIMG, #singlepageIMG {
+    object-fit: contain;
+}
+
+.singlepageIMG-div img {
+    width: 100%;
+    height: 100%;
+}
+
+.singlepageIMG-div {
+    width: 25vw;
+    max-height: 40vh;
+    margin: auto;
+    margin-bottom: 5vh;
+}
+
+.singlepageIMG-div-grow {
+    position: fixed;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.7);
+    height: 100vh;
+    overflow: scroll;
+    margin: auto;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    border: 5vw solid rgba(0, 0, 0, 0);
+}
+
+.singlepageIMG-div-grow img {
+    width: 100%;
+    height: 100%;
+}
+
+.store-img {
+    width: 100%;
+    object-fit: contain;
 }

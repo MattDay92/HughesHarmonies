@@ -192,7 +192,7 @@ export default function Admin({ data, setData, getItems, storage }) {
         <br />
         <input type='file' name='AudioUpload' id='AudioUpload' />
         <br />
-        <label for='PhotoUpload' className='form-label'>Photo Upload</label>
+        <label for='PhotoUpload' className='form-label'>PDF Upload</label>
         <br />
         <input type='file' name='PhotoUpload' id='PhotoUpload' />
         <br />

@@ -5,6 +5,7 @@ import Logo from '../components/photos/HughesHarmoniesLogo.webp'
 import HughesFam from '../components/photos/HughesFam.webp'
 import Testimonial1 from '../components/photos/KCD.webp'
 import Testimonial2 from '../components/photos/JD.png'
+import Testimonial3 from '../components/photos/MD.jpg'
 
 export default function Home() {
     return (
@@ -74,12 +75,12 @@ export default function Home() {
                     <div className='testimonial-text'>Jerico is so lit</div>
                     <div className='testimonial-title-card'>
                         <div>
-                            <img src={Testimonial1} />
+                            <img src={Testimonial3} />
                         </div>
                         <div>
                             <h4>Matt Day</h4>
                             <h5>Not a Choir Director</h5>
-                            <h5>Franklin Community High School</h5>
+                            <h5></h5>
                         </div>
                     </div>
                 </div>
@@ -88,20 +89,21 @@ export default function Home() {
             <div className='pricing'>
                 <div className='pricing-box-1'>
                     <h3>Stock w/ Adjustments</h3>
-                    <div className='pricing-box-price'>$300 -$500</div>
+                    <div className='pricing-box-price'>$300 - $500</div>
                     <div>Anything from our vast library of arrangements can be customized to fit your needs</div>
                     <button className='btn btn-warning'>Contact</button>
                 </div>
                 <div className='pricing-box-2'>
-                    <h3>Stock w/ Adjustments</h3>
-                    <div className='pricing-box-price'>$300 -$500</div>
-                    <div>Anything from our vast library of arrangements can be customized to fit your needs</div>
+                    <h3>Custom Arrangement</h3>
+                    <div className='pricing-box-price'>$800 - $1100</div>
+                    <div>Hughes Harmonies will arrange any song of your choice in any style you like! 
+                        Includes instrumental accompaniment.</div>
                     <button className='btn btn-warning'>Contact</button>
                 </div>
                 <div className='pricing-box-3'>
-                    <h3>Stock w/ Adjustments</h3>
-                    <div className='pricing-box-price'>$300 -$500</div>
-                    <div>Anything from our vast library of arrangements can be customized to fit your needs</div>
+                    <h3>Stock Arrangement</h3>
+                    <div className='pricing-box-price'>$200</div>
+                    <div>100s of ready-to-perform arrangements with Instrumental Accompaniments</div>
                     <button className='btn btn-warning'>Contact</button>
                 </div>
             </div>

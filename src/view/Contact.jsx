@@ -25,7 +25,7 @@ export default function Contact() {
         console.log(formData)
 
         try {
-            const response = await fetch('http://localhost:3000', {
+            const response = await fetch('https://hughesharmoniesbackend.vercel.app/api/send-email.js', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ export default function Contact() {
                     <textarea name="message" className='form-control' value={formData.message} onChange={handleChange} required />
                 </label><br />
 
-                <button type="submit" className='btn btn-primary'>Send</button>
+                <button type="submit" className='btn btn-warning'>Send</button>
             </form>
 
             {responseMessage && <p>{responseMessage}</p>}

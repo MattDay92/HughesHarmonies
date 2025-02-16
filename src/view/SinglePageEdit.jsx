@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../SinglePage.css'
 import { useParams } from 'react-router-dom'
 import { db } from "../main.jsx";
+import BackupIMG from '../components/photos/BD-Choir-3.webp'
 import { getStorage, ref, uploadBytes, uploadBytesResumable, uploadString, getDownloadURL, deleteObject } from 'firebase/storage'
 import { collection, query, where, getDocs, getDoc, doc, updateDoc } from "firebase/firestore";
 
@@ -13,10 +14,12 @@ export default function SinglePageEdit({ data, getItems, storage }) {
     const updateItem = async (event) => {
         event.preventDefault()
         const tagsArray = event.target.tags.value.split(',').map(item => item.trim()).filter(Boolean);
+        const voicingsArray = event.target.voicing.value.split(',').map(item => item.trim()).filter(Boolean);
+
 
         let updatedData = {
             title: event.target.title.value,
-            voicing: event.target.voicing.value, // Store as an array
+            voicing: voicingsArray, // Store as an array
             difficulty: event.target.difficulty.value,
             tags: tagsArray,             // Store as an array          
             excerpt: event.target.excerpt.value,
@@ -27,11 +30,13 @@ export default function SinglePageEdit({ data, getItems, storage }) {
 
         try {
 
-            const fileInput = event.target.elements["AudioUpload"];
-            const newFile = fileInput?.files[0]; // Get the new file if uploaded
+            const AudioInput = event.target.elements["AudioUpload"];
+            const newAudioFile = AudioInput?.files[0];
+            const PhotoInput = event.target.elements["PhotoUpload"];
+            const newPhotoFile = PhotoInput?.files[0];
             const docRef = doc(db, "arrangements", id);
 
-            if (newFile) {
+            if (newAudioFile) {
                 // Step 1: Delete old file if it exists
                 if (arrangement.audioURL) {
                     const oldFileRef = ref(storage, arrangement.audioURL);
@@ -41,12 +46,29 @@ export default function SinglePageEdit({ data, getItems, storage }) {
                 }
 
                 // Step 2: Upload new file
-                const newFileRef = ref(storage, `audio/${newFile.name}`);
-                const uploadTask = await uploadBytesResumable(newFileRef, newFile, { contentType: newFile.type });
+                const newFileRef = ref(storage, `audio/${newAudioFile.name}`);
+                const uploadTask = await uploadBytesResumable(newFileRef, newAudioFile, { contentType: newAudioFile.type });
                 const newDownloadURL = await getDownloadURL(uploadTask.ref);
 
                 updatedData.audioURL = newDownloadURL; // Store new file URL in Firestore
             }
+            if (newPhotoFile) {
+                // Step 1: Delete old file if it exists
+                if (arrangement.photoURL) {
+                    const oldFileRef = ref(storage, arrangement.photoURL);
+                    await deleteObject(oldFileRef).catch((error) => {
+                        console.warn("Old file deletion failed (may not exist):", error);
+                    });
+                }
+
+                // Step 2: Upload new file
+                const newFileRef = ref(storage, `audio/${newPhotoFile.name}`);
+                const uploadTask = await uploadBytesResumable(newFileRef, newPhotoFile, { contentType: newPhotoFile.type });
+                const newDownloadURL = await getDownloadURL(uploadTask.ref);
+
+                updatedData.photoURL = newDownloadURL; // Store new file URL in Firestore
+            }
+
             await updateDoc(docRef, updatedData); // Update the document
             console.log("Document updated successfully!");
         } catch (error) {
@@ -84,8 +106,13 @@ export default function SinglePageEdit({ data, getItems, storage }) {
         <div className='singlepage-fullpage'>
             <div className='d-flex justify-content-around'>
                 <div className='singlepage-left'>
-                    <img className='singlepageIMG' src='https://firebasestorage.googleapis.com/v0/b/triangleasphalt-4b0f2.firebasestorage.app/o/files%2FTestPhoto1?alt=media&token=a3149957-4888-4276-806f-209c6da406a5' />
-                    <audio controls>
+                    {arrangement.photoURL ? (
+                        <div>
+                            <embed src={arrangement.photoURL} />
+                        </div>
+                    ) :
+                        <img className='singlepageIMG' src={BackupIMG} />
+                    }                    <audio controls>
                         <source src={arrangement.audioURL} type="audio/mpeg" />
                         Your browser does not support the audio element.
                     </audio>
@@ -110,7 +137,12 @@ export default function SinglePageEdit({ data, getItems, storage }) {
                     <label for='price' className="form-label">Price</label>
                     <input defaultValue={arrangement.price} className='form-control' id='price' name='price' />
                     <label for='AudioUpload' className='form-label'>Audio Upload</label>
+                    <br />
                     <input type='file' name='AudioUpload' id='AudioUpload' />
+                    <br />
+                    <label for='PhotoUpload' className='form-label'>PDF Upload</label>
+                    <br />
+                    <input type='file' name='PhotoUpload' id='PhotoUpload' />
                     <br />
                     <button type='submit' className='btn btn-primary'>Submit</button>
                 </form>
