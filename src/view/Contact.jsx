@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import HeroImage from '../components/photos/BD-Choir-1.webp'
 import '../About.css'
 
@@ -6,23 +6,34 @@ export default function Contact() {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        inquiryType: '',
+        inquiryType: [],
         message: '',
     });
 
     const [responseMessage, setResponseMessage] = useState('');
 
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+        const { name, value, type, checked } = e.target;
+
+        if (type === "checkbox") {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                [name]: checked
+                    ? [...prevFormData[name], value] // Add value if checked
+                    : prevFormData[name].filter((item) => item !== value), // Remove if unchecked
+            }));
+        } else {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                [name]: value,
+            }));
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(formData)
+        console.log("Submitting: ", formData)
 
         try {
             const response = await fetch('https://hughesharmoniesbackend.vercel.app/api/send-email.js', {
@@ -34,13 +45,13 @@ export default function Contact() {
             });
 
             const result = await response.json();
-            setResponseMessage(result.message);
+            alert(result.message)
         } catch (error) {
-            setResponseMessage('An error occurred while sending the email.');
+            alert('An error occurred while sending the email.');
         }
     };
 
-    
+
     return (
         <div className='contact'>
             <div className='about-hero-container'>
@@ -65,18 +76,18 @@ export default function Contact() {
                 <label>
                     Inquiry Type:
                     <div>
-                        <input type="checkbox" id="option1" name="inquiryType" value={formData.inquiryType} />
-                            <label for="option1">Custom Arrangement</label>
+                        <input type="checkbox" id="option1" name="inquiryType" onChange={handleChange} value="Custom Arrangement" checked={formData.inquiryType.includes("Custom Arrangement")} />
+                        <label htmlFor="option1">Custom Arrangement</label>
                     </div>
 
                     <div>
-                        <input type="checkbox" id="option2" name="inquiryType" value={formData.inquiryType} />
-                            <label for="option2">Stock Arrangements</label>
+                        <input type="checkbox" id="option2" name="inquiryType" onChange={handleChange}  value="Stock Arrangements" checked={formData.inquiryType.includes("Stock Arrangements")} />
+                        <label htmlFor="option2">Stock Arrangements</label>
                     </div>
 
                     <div>
-                        <input type="checkbox" id="option3" name="inquiryType" value={formData.inquiryType} />
-                            <label for="option3">General</label>
+                        <input type="checkbox" id="option3" name="inquiryType" onChange={handleChange}  value="General" checked={formData.inquiryType.includes("General")} />
+                        <label htmlFor="option3">General</label>
                     </div>
                 </label><br />
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import '../Home.css'
 import HeroImage from '../components/photos/BD-Choir-1.webp'
 import Logo from '../components/photos/HughesHarmoniesLogo.webp'
@@ -18,7 +19,7 @@ export default function Home() {
                     <p>Hughes Harmonies offers custom choral arrangements for all levels of ensembles.
                         At competitively low prices, choose from previously arranged music or custom charts
                         for your next competition or concert!</p>
-                    <a className='btn btn-warning'>Shop</a>
+                    <Link to={'/stockarrangements'} className='btn btn-warning'>Shop</Link>
                 </div>
             </div>
 

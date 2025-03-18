@@ -61,6 +61,68 @@ nav {
     color: rgb(249, 248, 22)
 }
 
+@media (max-width: 768px) {
+    .nav-text {
+        display: none;
+    }
+
+    .fa-bars {
+        display: block !important;
+        position: absolute;
+        left: 10vw;
+        color: white;
+    }
+
+    .nav-logo {
+        width: 50vw !important;
+        height: fit-content !important;
+        margin: auto;
+    }
+    
+    nav .btn, .nav-links {
+        display: none;
+    }
+
+    #mobile-nav-section {
+        display: block;
+        position: fixed;
+        color: white;
+        padding-bottom: 5vh;
+        width: 100vw;
+    }
+
+    .show-mobile-nav {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 50vh;
+        transition: height 0.5s ease-in-out;
+        opacity: 1 !important;
+        pointer-events: all;
+        background: rgb(62, 17, 78);
+        z-index: 100;
+    }
+
+    .hide-mobile-nav {
+        display: none;
+        height: 0;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .mobile-nav-text {
+        display: block !important;
+        text-align: center;
+        font-weight: 700;
+        padding-top: 5vh;
+        color: white;
+    }
+}
+
+#mobile-nav-section, .fa-bars {
+    display: none;
+}
+
 /* ---------------------------CONTACT------------------------------ */
 .contact {
     min-height: 100vh;

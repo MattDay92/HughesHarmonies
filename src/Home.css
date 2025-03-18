@@ -24,7 +24,7 @@
 .hero-text {
   position: absolute;
   width: 50vw;
-  z-index: 100;
+  z-index: 5 !important;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -41,6 +41,13 @@
 .btn-warning {
   background: rgb(249, 248, 22);
   color: rgb(62, 17, 78);
+}
+
+@media (max-width: 768px) {
+  .hero-logo {
+    width: 75vw !important;
+    
+  }
 }
 
 /* ----------------------------MEET JERICO--------------------------------- */
