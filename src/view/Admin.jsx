@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../Admin.css'
 import { collection, addDoc, query, where, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, uploadBytesResumable, uploadString, getDownloadURL } from 'firebase/storage'
@@ -12,6 +12,7 @@ export default function Admin({ data, setData, getItems, storage }) {
   const [fileUpload, setFileUpload] = useState('')
   const [fileUploadName, setFileUploadName] = useState('')
   const [fileDownload, setFileDownload] = useState('')
+  const navigate = useNavigate()
 
 
 
@@ -43,8 +44,6 @@ export default function Admin({ data, setData, getItems, storage }) {
     const photoInput = event.target.elements["PhotoUpload"];
     const photoFile = photoInput?.files[0]; if (photoFile) {
       try {
-        
-
         const storageRef = ref(storage, `images/${photoFile.name}`);
         const uploadTask = await uploadBytes(storageRef, photoFile);
         photoDownloadURL = await getDownloadURL(uploadTask.ref);
@@ -58,6 +57,7 @@ export default function Admin({ data, setData, getItems, storage }) {
 
     const voicingsArray = event.target.voicing.value.split(',').map(item => item.trim()).filter(Boolean);
     const tagsArray = event.target.tags.value.split(',').map(item => item.trim()).filter(Boolean);
+    const showFunctionArray = event.target.showFunction.value.split(',').map(item => item.trim()).filter(Boolean);
 
     console.log(voicingsArray)
 
@@ -66,7 +66,8 @@ export default function Admin({ data, setData, getItems, storage }) {
         title: event.target.title.value,
         voicing: voicingsArray, // Store as an array
         difficulty: event.target.difficulty.value,
-        tags: tagsArray,             // Store as an array          
+        tags: tagsArray,             // Store as an array 
+        showFunction: showFunctionArray,      
         excerpt: event.target.excerpt.value,
         description: event.target.description.value,
         accompaniment: event.target.accompaniment.value,
@@ -74,8 +75,12 @@ export default function Admin({ data, setData, getItems, storage }) {
         audioURL: audioDownloadURL,
         photoURL: photoDownloadURL
       });
+
+      event.target.reset(); // Clear form after submit
+
       getItems();
       console.log("Document written with ID: ", docRef.id);
+
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -180,6 +185,8 @@ export default function Admin({ data, setData, getItems, storage }) {
         <input className='form-control' id='difficulty' name='difficulty' />
         <label for='tags' className="form-label">Tags (Separated by Commas)</label>
         <input className='form-control' id='tags' name='tags' />
+        <label for='showFunction' className='form-label'>Show Function (Separated by Commas)</label>
+        <input className='form-control' id='showFunction' name='showFunction' />
         <label for='excerpt' className="form-label">Excerpt</label>
         <input className='form-control' id='excerpt' name='excerpt' />
         <label for='description' className="form-label">Description</label>

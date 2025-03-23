@@ -5,7 +5,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '../main';
 import '../StockArrangements.css'
 
-export default function StockArrangements({ data, voicings, tags }) {
+export default function StockArrangements({ data, voicings, tags, showFunctions }) {
 
     const [filtered, setFiltered] = useState(null)
     const [filteredName, setFilteredName] = useState(null)
@@ -78,6 +78,40 @@ export default function StockArrangements({ data, voicings, tags }) {
         }
     }
 
+    const filterItemsByShowFunction = async (filter) => {
+        if (!filter) {
+            console.error("No filter provided");
+            return;
+        }
+
+        setFilteredName(filter)
+
+        console.log(filter)
+
+        const itemRef = collection(db, "arrangements");
+
+        try {
+            const q = query(itemRef, where("showFunction", "array-contains", filter));
+
+            let filteredList = []
+
+            const querySnapshot = await getDocs(q);
+
+            if (querySnapshot.empty) {
+                console.log("No matching documents found.");
+            } else {
+                querySnapshot.forEach((doc) => {
+                    console.log(doc.id, " => ", doc.data());
+                    filteredList.push({ id: doc.id, ...doc.data() })
+                });
+
+                setFiltered(filteredList)
+            }
+        } catch (e) {
+            console.error("Error filtering items: ", e);
+        }
+    }
+
     useEffect(() => {
         console.log(filtered)
     })
@@ -115,6 +149,21 @@ export default function StockArrangements({ data, voicings, tags }) {
                             return (
                                 <div key={index}>
                                     <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByTag(x)}>
+                                        {x}
+                                    </button>
+                                </div>
+                            );
+                        })}
+                    </div>
+                ) : null}
+
+                {showFunctions ? (
+                    <div className='stockarrangements-functions'>
+                        {showFunctions.filter(Boolean).map((x, index) => {
+                            let btnClass = x === filteredName ? 'btn-warning-darker' : 'btn-warning';
+                            return (
+                                <div key={index}>
+                                    <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByShowFunction(x)}>
                                         {x}
                                     </button>
                                 </div>

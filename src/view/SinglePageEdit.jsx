@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../SinglePage.css'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { db } from "../main.jsx";
 import BackupIMG from '../components/photos/BD-Choir-3.webp'
 import { getStorage, ref, uploadBytes, uploadBytesResumable, uploadString, getDownloadURL, deleteObject } from 'firebase/storage'
@@ -10,17 +10,21 @@ import { collection, query, where, getDocs, getDoc, doc, updateDoc } from "fireb
 export default function SinglePageEdit({ data, getItems, storage }) {
     const { id } = useParams();
     const [arrangement, setArrangement] = useState(null)
+    const navigate = useNavigate()
 
     const updateItem = async (event) => {
         event.preventDefault()
+
         const tagsArray = event.target.tags.value.split(',').map(item => item.trim()).filter(Boolean);
         const voicingsArray = event.target.voicing.value.split(',').map(item => item.trim()).filter(Boolean);
+        const showFunctionArray = event.target.showFunction.value.split(',').map(item => item.trim()).filter(Boolean);
 
 
         let updatedData = {
             title: event.target.title.value,
             voicing: voicingsArray, // Store as an array
             difficulty: event.target.difficulty.value,
+            showFunction: showFunctionArray,      
             tags: tagsArray,             // Store as an array          
             excerpt: event.target.excerpt.value,
             description: event.target.description.value,
@@ -71,6 +75,8 @@ export default function SinglePageEdit({ data, getItems, storage }) {
 
             await updateDoc(docRef, updatedData); // Update the document
             console.log("Document updated successfully!");
+
+            navigate('/admin')
         } catch (error) {
             console.error("Error updating document:", error);
         }
@@ -107,11 +113,13 @@ export default function SinglePageEdit({ data, getItems, storage }) {
             <div className='d-flex justify-content-around'>
                 <div className='singlepage-left'>
                     {arrangement.photoURL ? (
-                        <div>
+                        <div className='singlepageIMG-div'>
                             <embed src={arrangement.photoURL} />
                         </div>
                     ) :
+                    <div className='singlepageIMG-div'>
                         <img className='singlepageIMG' src={BackupIMG} />
+                    </div>
                     }                    <audio controls>
                         <source src={arrangement.audioURL} type="audio/mpeg" />
                         Your browser does not support the audio element.
@@ -128,6 +136,8 @@ export default function SinglePageEdit({ data, getItems, storage }) {
                     <input defaultValue={arrangement.difficulty} className='form-control' id='difficulty' name='difficulty' />
                     <label for='tags' className="form-label">Tags (Separated by Commas)</label>
                     <input defaultValue={arrangement.tags} className='form-control' id='tags' name='tags' />
+                    <label for='showFunction' className='form-label'>Show Function (Separated by Commas)</label>
+                    <input defaultValue={arrangement.showFunction} className='form-control' id='showFunction' name='showFunction' />
                     <label for='excerpt' className="form-label">Excerpt</label>
                     <input defaultValue={arrangement.excerpt} className='form-control' id='excerpt' name='excerpt' />
                     <label for='description' className="form-label">Description</label>

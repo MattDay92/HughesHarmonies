@@ -78,6 +78,8 @@ export default function SinglePage({ data, getItems }) {
                     <p>{arrangement.description}</p>
                     <h2>Voicing</h2>
                     <p>{arrangement.voicing}</p>
+                    <h2>Show Function</h2>
+                    <p>{arrangement.showFunction ? arrangement.showFunction.join(', ') : 'No show functions available'}</p>
                     <h2>Accompaniment</h2>
                     <p>{arrangement.accompaniment}</p>
                     <h2>Difficulty</h2>
