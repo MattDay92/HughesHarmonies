@@ -44,9 +44,15 @@
 }
 
 @media (max-width: 768px) {
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80vw !important
+  }
+
   .hero-logo {
-    width: 75vw !important;
-    
+    width: 110% !important;
   }
 }
 
@@ -81,6 +87,32 @@
   text-align: center;
 }
 
+@media (max-width: 768px) {
+  .meet-jerico {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .meet-jerico-img-div {
+    width: 45vw;
+    margin-bottom: 5vh;
+  }
+
+  .meet-jerico-info {
+    width: 70vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .meet-jerico-img-div {
+    width: 70vw;
+  }
+
+  .meet-jerico-info {
+    width: 80vw;
+  }
+}
+
 
 /* ---------------------------TESTIMONIALS------------------------------------ */
 
@@ -98,12 +130,11 @@
 .testimonial-box-3 {
   display: flex;
   flex-direction: column;
-
   height: 40vh;
   width: 70vw;
   background: black;
   color: white;
-
+  border: 5px solid white;
 }
 
 .testimonial-text {
@@ -125,6 +156,34 @@
   left: 50%;
   transform: translate(-50%, -50%);
   animation: testimonial-box-1 18s infinite;
+}
+
+@media (max-width: 768px) {
+
+  .testimonial-box-1,
+  .testimonial-box-2,
+  .testimonial-box-3 {
+    height: 60vh;
+  }
+
+  .testimonial-title-card {
+    width: 50% !important;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .testimonial-box-1,
+  .testimonial-box-2,
+  .testimonial-box-3 {
+    height: 80vh;
+  }
+
+  .testimonial-title-card {
+    width: 80% !important;
+    height: 25%;
+    margin-bottom: 5%;
+  }
 }
 
 @keyframes testimonial-box-1 {
@@ -256,6 +315,53 @@
 
 }
 
+@media (max-width: 768px) {
+  .pricing {
+    flex-wrap: wrap;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+  }
+
+  .pricing-box-2 {
+    order: -1; /* Moves it to the top */
+    width: 80% !important;
+    height: 35vh;
+    margin: auto;
+    margin-top: 2vh;
+    margin-bottom: 5vh;
+  }
+
+  .pricing-box-1,
+  .pricing-box-3 {
+    width: 45% !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .pricing {
+    flex-direction: column;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+  }
+
+  .pricing-box-2 {
+    order: 0 !important; /* Moves it to the top */
+  }
+
+  .pricing-box-1,
+  .pricing-box-2,
+  .pricing-box-3 {
+    width: 90% !important;
+    height: 35vh !important;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+  }
+
+  .pricing-box-2 {
+    width: 100% !important;
+  }
+}
+
 .pricing-box-1,
 .pricing-box-3 {
   width: 30%;
@@ -271,7 +377,9 @@
   color: white;
 }
 
-.pricing-box-1:hover, .pricing-box-2:hover, .pricing-box-3:hover {
+.pricing-box-1:hover,
+.pricing-box-2:hover,
+.pricing-box-3:hover {
   transform: scale(1.1);
   transition: transform .2s ease-in-out;
 }

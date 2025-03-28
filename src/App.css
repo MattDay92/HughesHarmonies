@@ -116,6 +116,7 @@ nav {
         font-weight: 700;
         padding-top: 5vh;
         color: white;
+        text-decoration: none;
     }
 }
 
@@ -154,10 +155,11 @@ footer {
     justify-content: space-around;
     align-items: center;
     color: white;
+    flex-direction: column;
 }
 
 footer div {
-    width: 25vw;
+    width: 100vw;
 }
 
 .social-icons .btn {
@@ -169,4 +171,24 @@ footer div {
 
 .social-icons img {
     width: 100%;
+}
+
+@media (max-width: 768px) {
+    .footer-text {
+        display: none;
+    }
+
+    .footer-contact-btn {
+        display: none;
+    }
+
+    .social-icons {
+        width: 40vw;
+    }
+}
+
+@media (max-width: 500px) {
+    .social-icons {
+        width: 80vw;
+    }
 }

@@ -43,6 +43,22 @@
     margin-bottom: 1vh;
 }
 
+@media (max-width: 500px) {
+    .about-jerico img {
+        width: 60vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-jerico img {
+        width: 40vw;
+    }
+
+    .about-jerico {
+        width: 80vw;
+    }
+}
+
 /* -----------------------------------FAQ-------------------------------------- */
 
 .about-FAQ {
