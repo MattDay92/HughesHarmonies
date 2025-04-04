@@ -74,7 +74,7 @@
     margin-bottom: 10vh;
 }
 
-.stockarrangements-categories, .stockarrangements-tags, .stockarrangements-showall, .stockarrangements-functions {
+.stockarrangements-categories, .stockarrangements-tags, .stockarrangements-functions {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -84,7 +84,10 @@
 }
 
 .stockarrangements-showall {
-    justify-content: center !important;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 4vh;
 }
 
 .arrangement-card-link {
@@ -97,27 +100,56 @@
     color: rgb(190, 190, 2);
 }
 
+.mobile-arrangements-accordion {
+    display: none;
+}
+
 @media (max-width: 500px) {
     .arrangements-maindiv {
         display: flex;
         justify-content: space-between;
-        width: 95vw;
+        width: 80vw;
         margin: auto;
     }
 
     .arrangements-list {
         display: block;
-        width: 60vw;
+        width: 80vw;
         margin: 0;
         margin-top: 10vh;
     }
 
     .card {
-        width: 60vw !important;
+        width: 80vw !important;
     }
 }
 
 @media (max-width: 768px) {
+    .arrangements-filters-div {
+        display: none;
+    }
+
+    .stockarrangements-categories h2, .stockarrangements-tags h2, .stockarrangements-functions h2 {
+        display: none;
+    }
+
+    .stockarrangements-categories, .stockarrangements-tags, .stockarrangements-functions {
+        flex-direction: row;
+    }
+
+    .mobile-arrangements-accordion {
+        display: block;
+    }
+
+    .mobile-arrangements-accordion .accordion-button, .mobile-arrangements-accordion .accordion-item {
+        display: block;
+        width: 100vw;
+        border-radius: 0 !important;
+        margin: 0;
+        border: 0;
+        text-align: center;
+    }
+
     .card {
         width: 30vw;
     }

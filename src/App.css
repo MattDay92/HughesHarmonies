@@ -12,6 +12,12 @@ h2 {
     font-style: normal;
 }
 
+@media (max-width: 500px) {
+    h1 {
+        font-size: 10vw !important;
+    }
+}
+
 h4,
 h5 {
     font-size: small;
