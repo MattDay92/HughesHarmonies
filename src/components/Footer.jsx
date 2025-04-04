@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Facebook from '../components/photos/Facebook.png'
 import Instagram from '../components/photos/Instagram.png'
 import TikTok from '../components/photos/TikTok.png'
@@ -13,7 +14,7 @@ export default function Footer() {
                     for your next competition or concert!
                 </div>
                 <div className='footer-contact-btn text-center'>
-                    <button className='btn btn-warning'>Contact Hughes Harmonies</button>
+                    <Link to={'/contact'} className='btn btn-warning'>Contact Hughes Harmonies</Link>
                 </div>
                 <div className='social-icons text-center'>
                     <a href='https://www.facebook.com' target='_blank' className='btn facebook'><img src={Facebook} /></a>

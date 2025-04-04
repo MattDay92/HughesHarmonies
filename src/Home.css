@@ -118,7 +118,7 @@
 
 .testimonials {
   min-height: 100vh;
-  background: rgb(90, 33, 100);
+  background: #3e114e;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -177,6 +177,7 @@
   .testimonial-box-2,
   .testimonial-box-3 {
     height: 80vh;
+    font-size: 3.5vw;
   }
 
   .testimonial-title-card {
@@ -311,7 +312,7 @@
   text-align: center;
   padding-left: 2vw;
   padding-right: 2vw;
-  border: 2px solid rgb(62, 17, 78);
+  border: 5px solid #3e114e;
 
 }
 
@@ -319,7 +320,6 @@
   .pricing {
     flex-wrap: wrap;
     padding-top: 10vh;
-    padding-bottom: 10vh;
   }
 
   .pricing-box-2 {
@@ -367,13 +367,13 @@
   width: 30%;
   height: 40vh;
   background: white;
-  color: rgb(90, 33, 100)
+  color: #3e114e
 }
 
 .pricing-box-2 {
   width: 30%;
   height: 45vh;
-  background: rgb(90, 33, 100);
+  background: #3e114e;
   color: white;
 }
 

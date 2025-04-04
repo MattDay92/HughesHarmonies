@@ -2,6 +2,7 @@
     min-height: 100vh;
     text-align: center;
     margin-top: 10vh;
+    margin-bottom: 10vh;
 }
 
 .singlepage-left {
@@ -51,4 +52,20 @@
 .store-img {
     width: 100%;
     object-fit: contain;
+}
+
+@media (max-width: 500px) {
+    .singlepageIMG-div {
+        width: 75vw;
+    }
+
+    .singlepage-left {
+        width: 80vw;
+        margin-top: 10vh;
+    }
+    
+    .singlepage-right {
+        width: 80vw;
+        margin-top: 10vh;
+    }
 }

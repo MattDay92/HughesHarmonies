@@ -21,7 +21,7 @@ export default function Nav() {
     return (
         <div>
             <nav>
-                <div className='nav-logo'>
+                <div className='nav-logo-div'>
                     <Link to={'/'}><img className='nav-logo' src={Logo} /></Link>
                 </div>
                 <div className='nav-links'>

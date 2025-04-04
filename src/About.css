@@ -3,7 +3,7 @@
 }
 
 .about-hero-container {
-    height: 50vh;
+    height: 30vh;
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -79,13 +79,13 @@
 }
 
 .accordion-button:focus, .accordion-button:active {
-    background-color: #300d3d;
+    background-color: #582e68;
     box-shadow: 0 0 10px 2px rgba(62, 17, 78, 0.75); 
     outline: none; 
 }
 
 /* Style for the open (non-collapsed) state */
 .accordion-button:not(.collapsed) {
-    background-color: #5c2a6b; /* Purple color */
+    background-color: #582e68; /* Purple color */
     color: white; /* Ensure text stays white for contrast */
 }

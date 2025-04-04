@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import ScrollToTop from './ScrollToTop.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { collection, addDoc, query, where, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { db } from "./main.jsx";
@@ -82,6 +83,7 @@ function App({storage}) {
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop />
         <Nav />
         <Routes>
           <Route path='/' element={<Home />} />

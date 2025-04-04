@@ -3,7 +3,7 @@
 }
 
 .arrangements-hero-container {
-    height: 50vh;
+    height: 30vh;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -51,6 +51,19 @@
     margin-top: 2vh;
 }
 
+.arrangements-maindiv {
+    display: flex;
+    width: 90vw;
+    margin: auto;
+}
+
+.arrangements-filters-div {
+    display: flex;
+    flex-direction: column;
+    width: 15vw;
+    margin-top: 12vh;
+}
+
 .arrangements-list {
     display: flex;
     justify-content: space-between;
@@ -64,11 +77,10 @@
 .stockarrangements-categories, .stockarrangements-tags, .stockarrangements-showall, .stockarrangements-functions {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     flex-wrap: wrap;
-    width: 50vw;
-    margin: auto;
-    margin-top: 3vh;
-    margin-bottom: 3vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }
 
 .stockarrangements-showall {
@@ -86,8 +98,22 @@
 }
 
 @media (max-width: 500px) {
+    .arrangements-maindiv {
+        display: flex;
+        justify-content: space-between;
+        width: 95vw;
+        margin: auto;
+    }
+
+    .arrangements-list {
+        display: block;
+        width: 60vw;
+        margin: 0;
+        margin-top: 10vh;
+    }
+
     .card {
-        width: 70vw;
+        width: 60vw !important;
     }
 }
 

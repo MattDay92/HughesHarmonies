@@ -110,7 +110,7 @@ export default function SinglePageEdit({ data, getItems, storage }) {
 
     return (
         <div className='singlepage-fullpage'>
-            <div className='d-flex justify-content-around'>
+            <div className='d-flex justify-content-around flex-wrap'>
                 <div className='singlepage-left'>
                     {arrangement.photoURL ? (
                         <div className='singlepageIMG-div'>

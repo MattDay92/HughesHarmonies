@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+
 h1,
 h2 {
     font-family: "Permanent Marker";
@@ -42,8 +43,14 @@ nav {
     font-style: normal;
 }
 
+.nav-logo-div {
+    height: 10vh !important;
+}
+
 .nav-logo {
-    height: 100% !important;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .nav-links {
@@ -57,8 +64,11 @@ nav {
     color: white;
 }
 
-.nav-link:hover {
-    color: rgb(249, 248, 22)
+.nav-link:hover,
+.nav-link:focus,
+.nav-link:active {
+    color: rgb(249, 248, 22);
+    outline: none; /* Removes default focus outline */
 }
 
 @media (max-width: 768px) {
@@ -71,11 +81,11 @@ nav {
         position: absolute;
         left: 10vw;
         color: white;
+        top: 4vh;
     }
 
-    .nav-logo {
+    .nav-logo-div {
         width: 50vw !important;
-        height: fit-content !important;
         margin: auto;
     }
     
@@ -146,16 +156,27 @@ nav {
     width: 50vw;
 }
 
+@media (max-width: 500px) {
+    .contact-form {
+        width: 80vw;
+    }
+
+    .form-control {
+        width: 80vw !important; 
+    }
+}
+
 /* -----------------------------FOOTER------------------------------ */
 
 footer {
     height: 25vh;
-    background: rgb(90, 33, 100);
+    background: #3e114e;
     display: flex;
     justify-content: space-around;
     align-items: center;
     color: white;
     flex-direction: column;
+    margin-top: 10vh;
 }
 
 footer div {

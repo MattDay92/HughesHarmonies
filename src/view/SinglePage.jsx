@@ -55,7 +55,7 @@ export default function SinglePage({ data, getItems }) {
     return (
         <div className='singlepage-fullpage'>
             <h1>{arrangement.title}</h1>
-            <div className='d-flex justify-content-around'>
+            <div className='d-flex justify-content-around flex-wrap'>
                 <div className='singlepage-left'>
                     {arrangement.photoURL ? (
                         <div>

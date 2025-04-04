@@ -125,62 +125,68 @@ export default function StockArrangements({ data, voicings, tags, showFunctions 
                 </div>
             </div>
 
-            <div>
-
-                {voicings ? (
-                    <div className='stockarrangements-categories'>
-                        {voicings.map((x, index) => {
-                            let btnClass = x === filteredName ? 'btn-warning-darker' : 'btn-warning';
-                            return (
-                                <div key={index}>
-                                    <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByVoicing(x)}>
-                                        {x}
-                                    </button>
-                                </div>
-                            );
-                        })}
-                    </div>
-                ) : null}
-
-                {tags ? (
-                    <div className='stockarrangements-tags'>
-                        {tags.map((x, index) => {
-                            let btnClass = x === filteredName ? 'btn-warning-darker' : 'btn-warning';
-                            return (
-                                <div key={index}>
-                                    <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByTag(x)}>
-                                        {x}
-                                    </button>
-                                </div>
-                            );
-                        })}
-                    </div>
-                ) : null}
-
-                {showFunctions ? (
-                    <div className='stockarrangements-functions'>
-                        {showFunctions.filter(Boolean).map((x, index) => {
-                            let btnClass = x === filteredName ? 'btn-warning-darker' : 'btn-warning';
-                            return (
-                                <div key={index}>
-                                    <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByShowFunction(x)}>
-                                        {x}
-                                    </button>
-                                </div>
-                            );
-                        })}
-                    </div>
-                ) : null}
-
-                {filtered ? (
-                    <div className='stockarrangements-showall'>
-                        <div>
-                            <button className='btn btn-sm btn-warning' onClick={() => { setFiltered(null); setFilteredName(null) }}>Show All</button>
+            <div className='arrangements-maindiv'>
+                <div className='arrangements-filters-div'>
+                    <h2>Voicing</h2>
+                    {voicings ? (
+                        <div className='stockarrangements-categories'>
+                            {voicings.map((x, index) => {
+                                let btnClass = x === filteredName ? 'btn-warning-darker' : 'btn-warning';
+                                return (
+                                    <div key={index}>
+                                        <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByVoicing(x)}>
+                                            {x}
+                                        </button>
+                                    </div>
+                                );
+                            })}
                         </div>
-                    </div>
-                )
-                    : null
-                }
+                    ) : null}
+
+                    {tags ? (
+                        <div className='stockarrangements-tags'>
+                            <h2>Genre</h2>
+
+                            {tags.map((x, index) => {
+                                let btnClass = x === filteredName ? 'btn-warning-darker' : 'btn-warning';
+                                return (
+                                    <div key={index}>
+                                        <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByTag(x)}>
+                                            {x}
+                                        </button>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    ) : null}
+
+                    {filtered ? (
+                        <div className='stockarrangements-showall'>
+                            <div>
+                                <button className='btn btn-sm btn-warning' onClick={() => { setFiltered(null); setFilteredName(null) }}>Show All</button>
+                            </div>
+                        </div>
+                    )
+                        : null
+                    }
+
+                    {showFunctions ? (
+                        <div className='stockarrangements-functions'>
+                            <h2>Show Function</h2>
+                            {showFunctions.filter(Boolean).map((x, index) => {
+                                let btnClass = x === filteredName ? 'btn-warning-darker' : 'btn-warning';
+                                return (
+                                    <div key={index}>
+                                        <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByShowFunction(x)}>
+                                            {x}
+                                        </button>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    ) : null}
+
+                </div>
 
                 {filtered ? (
                     <div className='arrangements-list'>
