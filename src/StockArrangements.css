@@ -14,7 +14,7 @@
 }
 
 .arrangements-hero-container h1 {
-    font-size: 6vw;
+    font-size: 5.5vw;
 }
 
 .arrangements-hero-container h2 {
@@ -42,6 +42,46 @@
 
 .hero-container h2 {
     color: rgb(249, 248, 22);
+}
+
+.btn-xs {
+    padding: 0.15rem 0.3rem;
+    font-size: 0.75rem;
+    border-radius: 0.15rem;
+  }
+
+.btn-primary {
+    background-color: rgb(170, 74, 170);
+    /* your purple */
+    border-color: rgb(170, 74, 170);
+    color: white;
+}
+
+/* Hover, Focus, Active */
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.show>.btn-primary.dropdown-toggle {
+    background-color: rgb(140, 50, 140) !important;
+    /* darker purple */
+    border-color: rgb(140, 50, 140);
+    color: white;
+}
+
+/* Remove Bootstrap's blue box-shadow */
+.btn-primary:focus,
+.btn-primary:active:focus,
+.btn-primary.active:focus {
+    box-shadow: 0 0 0 0.25rem rgba(170, 74, 170, 0.5);
+    /* subtle purple shadow */
+}
+
+.btn-primary-darker,
+.btn-primary-darker:hover {
+    color: white;
+    background-color: rgb(140, 50, 140);
+    border-color: rgb(140, 50, 140);
 }
 
 
@@ -74,7 +114,9 @@
     margin-bottom: 10vh;
 }
 
-.stockarrangements-categories, .stockarrangements-tags, .stockarrangements-functions {
+.stockarrangements-categories,
+.stockarrangements-tags,
+.stockarrangements-functions {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -129,11 +171,15 @@
         display: none;
     }
 
-    .stockarrangements-categories h2, .stockarrangements-tags h2, .stockarrangements-functions h2 {
+    .stockarrangements-categories h2,
+    .stockarrangements-tags h2,
+    .stockarrangements-functions h2 {
         display: none;
     }
 
-    .stockarrangements-categories, .stockarrangements-tags, .stockarrangements-functions {
+    .stockarrangements-categories,
+    .stockarrangements-tags,
+    .stockarrangements-functions {
         flex-direction: row;
     }
 
@@ -141,7 +187,8 @@
         display: block;
     }
 
-    .mobile-arrangements-accordion .accordion-button, .mobile-arrangements-accordion .accordion-item {
+    .mobile-arrangements-accordion .accordion-button,
+    .mobile-arrangements-accordion .accordion-item {
         display: block;
         width: 100vw;
         border-radius: 0 !important;

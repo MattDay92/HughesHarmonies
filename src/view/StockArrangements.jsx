@@ -134,15 +134,24 @@ export default function StockArrangements({ data, voicings, tags, showFunctions 
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
+                            <h2>Voicings</h2>
                             <div className='mobile-arrangements-filters-div'>
                                 {voicings ? (
                                     <div className='stockarrangements-categories'>
                                         <h2>Voicing</h2>
                                         {voicings.map((x, index) => {
-                                            let btnClass = x === filteredName ? 'btn-warning-darker' : 'btn-warning';
+                                            let btnClass = x === filteredName ? 'btn-primary-darker' : 'btn-primary';
                                             return (
                                                 <div key={index}>
-                                                    <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByVoicing(x)}>
+                                                    <button
+                                                        className={`btn btn-xs ${btnClass}`}
+                                                        onClick={() => {
+                                                            filterItemsByVoicing(x);
+                                                            const collapseElement = document.getElementById('collapseOne');
+                                                            const bsCollapse = bootstrap.Collapse.getInstance(collapseElement) || new bootstrap.Collapse(collapseElement);
+                                                            bsCollapse.hide();
+                                                        }}
+                                                    >
                                                         {x}
                                                     </button>
                                                 </div>
@@ -150,16 +159,26 @@ export default function StockArrangements({ data, voicings, tags, showFunctions 
                                         })}
                                     </div>
                                 ) : null}
+                                <h2>Genre</h2>
+
 
                                 {tags ? (
                                     <div className='stockarrangements-tags'>
                                         <h2>Genre</h2>
 
                                         {tags.map((x, index) => {
-                                            let btnClass = x === filteredName ? 'btn-warning-darker' : 'btn-warning';
+                                            let btnClass = x === filteredName ? 'btn-primary-darker' : 'btn-primary';
                                             return (
                                                 <div key={index}>
-                                                    <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByTag(x)}>
+                                                    <button
+                                                        className={`btn btn-xs ${btnClass}`}
+                                                        onClick={() => {
+                                                            filterItemsByTag(x);
+                                                            const collapseElement = document.getElementById('collapseOne');
+                                                            const bsCollapse = bootstrap.Collapse.getInstance(collapseElement) || new bootstrap.Collapse(collapseElement);
+                                                            bsCollapse.hide();
+                                                        }}
+                                                    >
                                                         {x}
                                                     </button>
                                                 </div>
@@ -168,14 +187,25 @@ export default function StockArrangements({ data, voicings, tags, showFunctions 
                                     </div>
                                 ) : null}
 
+                                <h2>Show Function</h2>
+
+
                                 {showFunctions ? (
                                     <div className='stockarrangements-functions'>
                                         <h2>Show Function</h2>
                                         {showFunctions.filter(Boolean).map((x, index) => {
-                                            let btnClass = x === filteredName ? 'btn-warning-darker' : 'btn-warning';
+                                            let btnClass = x === filteredName ? 'btn-primary-darker' : 'btn-primary';
                                             return (
                                                 <div key={index}>
-                                                    <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByShowFunction(x)}>
+                                                    <button
+                                                        className={`btn btn-xs ${btnClass}`}
+                                                        onClick={() => {
+                                                            filterItemsByShowFunction(x);
+                                                            const collapseElement = document.getElementById('collapseOne');
+                                                            const bsCollapse = bootstrap.Collapse.getInstance(collapseElement) || new bootstrap.Collapse(collapseElement);
+                                                            bsCollapse.hide();
+                                                        }}
+                                                    >
                                                         {x}
                                                     </button>
                                                 </div>
@@ -194,7 +224,7 @@ export default function StockArrangements({ data, voicings, tags, showFunctions 
             {filtered ? (
                 <div className='stockarrangements-showall'>
                     <div>
-                        <button className='btn btn-sm btn-warning' onClick={() => { setFiltered(null); setFilteredName(null) }}>Show All</button>
+                        <button className='btn btn-xs btn-primary' onClick={() => { setFiltered(null); setFilteredName(null) }}>Show All</button>
                     </div>
                 </div>
             )
@@ -207,10 +237,10 @@ export default function StockArrangements({ data, voicings, tags, showFunctions 
                     {voicings ? (
                         <div className='stockarrangements-categories'>
                             {voicings.map((x, index) => {
-                                let btnClass = x === filteredName ? 'btn-warning-darker' : 'btn-warning';
+                                let btnClass = x === filteredName ? 'btn-primary-darker' : 'btn-primary';
                                 return (
                                     <div key={index}>
-                                        <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByVoicing(x)}>
+                                        <button className={`btn btn-xs ${btnClass}`} onClick={() => filterItemsByVoicing(x)}>
                                             {x}
                                         </button>
                                     </div>
@@ -224,10 +254,10 @@ export default function StockArrangements({ data, voicings, tags, showFunctions 
                             <h2>Genre</h2>
 
                             {tags.map((x, index) => {
-                                let btnClass = x === filteredName ? 'btn-warning-darker' : 'btn-warning';
+                                let btnClass = x === filteredName ? 'btn-primary-darker' : 'btn-primary';
                                 return (
                                     <div key={index}>
-                                        <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByTag(x)}>
+                                        <button className={`btn btn-xs ${btnClass}`} onClick={() => filterItemsByTag(x)}>
                                             {x}
                                         </button>
                                     </div>
@@ -240,10 +270,10 @@ export default function StockArrangements({ data, voicings, tags, showFunctions 
                         <div className='stockarrangements-functions'>
                             <h2>Show Function</h2>
                             {showFunctions.filter(Boolean).map((x, index) => {
-                                let btnClass = x === filteredName ? 'btn-warning-darker' : 'btn-warning';
+                                let btnClass = x === filteredName ? 'btn-primary-darker' : 'btn-primary';
                                 return (
                                     <div key={index}>
-                                        <button className={`btn btn-sm ${btnClass}`} onClick={() => filterItemsByShowFunction(x)}>
+                                        <button className={`btn btn-xs ${btnClass}`} onClick={() => filterItemsByShowFunction(x)}>
                                             {x}
                                         </button>
                                     </div>
