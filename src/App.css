@@ -175,7 +175,7 @@ nav {
 /* -----------------------------FOOTER------------------------------ */
 
 footer {
-    height: 25vh;
+    min-height: 25vh;
     background: #3e114e;
     display: flex;
     justify-content: space-around;

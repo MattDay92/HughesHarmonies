@@ -37,6 +37,13 @@ export default function StockArrangements({ data, voicings, tags, showFunctions 
                     filteredList.push({ id: doc.id, ...doc.data() })
                 });
 
+                // Helper to remove "The " for sorting
+                const ignoreThe = str =>
+                    str?.toLowerCase().startsWith("the ") ? str.slice(4).toLowerCase() : str?.toLowerCase();
+
+                // Sort by title or name, ignoring "The "
+                filteredList.sort((a, b) => ignoreThe(a.title).localeCompare(ignoreThe(b.title)));
+
                 setFiltered(filteredList)
             }
         } catch (e) {
@@ -71,7 +78,14 @@ export default function StockArrangements({ data, voicings, tags, showFunctions 
                     filteredList.push({ id: doc.id, ...doc.data() })
                 });
 
-                setFiltered(filteredList)
+                // Helper to remove "The " for sorting
+                const ignoreThe = str =>
+                    str?.toLowerCase().startsWith("the ") ? str.slice(4).toLowerCase() : str?.toLowerCase();
+
+                // Sort by title or name, ignoring "The "
+                filteredList.sort((a, b) => ignoreThe(a.title).localeCompare(ignoreThe(b.title)));
+
+                setFiltered(filteredList);
             }
         } catch (e) {
             console.error("Error filtering items: ", e);
@@ -104,6 +118,13 @@ export default function StockArrangements({ data, voicings, tags, showFunctions 
                     console.log(doc.id, " => ", doc.data());
                     filteredList.push({ id: doc.id, ...doc.data() })
                 });
+
+                // Helper to remove "The " for sorting
+                const ignoreThe = str =>
+                    str?.toLowerCase().startsWith("the ") ? str.slice(4).toLowerCase() : str?.toLowerCase();
+
+                // Sort by title or name, ignoring "The "
+                filteredList.sort((a, b) => ignoreThe(a.title).localeCompare(ignoreThe(b.title)));
 
                 setFiltered(filteredList)
             }

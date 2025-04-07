@@ -22,7 +22,7 @@ export default function Footer() {
                     <a href='https://www.tiktok.com' target='_blank' className='btn tiktok'><img src={TikTok} /></a>
                 </div>
             </div>
-            <div className='d-flex w-75 justify-content-center align-items-center text-center my-2'>
+            <div className='d-flex w-75 justify-content-center align-items-center text-center pt-2 pb-2'>
                 © {new Date().getFullYear()}
                 <br />
                 Hughes Harmonies

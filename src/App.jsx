@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import ScrollToTop from './ScrollToTop.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { collection, addDoc, query, where, getDocs, doc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs, doc, deleteDoc, orderBy } from "firebase/firestore";
 import { db } from "./main.jsx";
 import './App.css'
 import Home from './view/Home'
@@ -14,7 +14,7 @@ import StockArrangements from './view/StockArrangements'
 import SinglePage from './view/SinglePage.jsx';
 import SinglePageEdit from './view/SinglePageEdit.jsx';
 
-function App({storage}) {
+function App({ storage }) {
 
   const [data, setData] = useState({})
   const [voicings, setVoicings] = useState([])
@@ -23,22 +23,27 @@ function App({storage}) {
 
   const getItems = async () => {
     const q = query(collection(db, "arrangements"));
-
-    let items = []
-
     const querySnapshot = await getDocs(q);
+
+    let items = [];
     querySnapshot.forEach((doc) => {
       items.push({ id: doc.id, ...doc.data() });
     });
-    setData(items)
+
+    // Sort ignoring "The" at the beginning
+    items.sort((a, b) => {
+      const titleA = a.title.replace(/^the\s+/i, "").toLowerCase();
+      const titleB = b.title.replace(/^the\s+/i, "").toLowerCase();
+      return titleA.localeCompare(titleB);
+    });
+
+    setData(items);
   }
 
   const getVoicingsAndTags = () => {
     let voicingList = []
     let tagList = []
     let functionList = []
-
-    console.log(data)
 
     for (let key in data) {
       let voicings = Array.isArray(data[key].voicing) ? data[key].voicing : [data[key].voicing];
