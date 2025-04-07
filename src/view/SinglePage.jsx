@@ -88,7 +88,8 @@ export default function SinglePage({ data, getItems }) {
                     <p>{arrangement.price}</p>
                 </div>
             </div>
-            <Link to={'/contact'} className='btn btn-warning' target='_blank'>Purchase</Link>
+            
+            <Link to={'https://buy.stripe.com/test_5kA8y03w5cbj8qk28b'} className='btn btn-warning' target='_blank'>Purchase Arrangement</Link>
         </div>
     )
 }

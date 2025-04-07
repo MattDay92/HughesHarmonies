@@ -79,9 +79,9 @@
 
 .btn-primary-darker,
 .btn-primary-darker:hover {
-    color: white;
-    background-color: rgb(140, 50, 140);
-    border-color: rgb(140, 50, 140);
+    color: rgb(170, 74, 170);
+    background-color: rgb(249, 248, 22);
+    border-color: rgb(249, 248, 22);
 }
 
 
@@ -139,7 +139,7 @@
 
 .arrangement-card-link:hover {
     text-decoration: none;
-    color: rgb(190, 190, 2);
+    color: rgb(170, 74, 170);
 }
 
 .mobile-arrangements-accordion {
