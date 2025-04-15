@@ -74,7 +74,8 @@ nav {
 .nav-link:focus,
 .nav-link:active {
     color: rgb(249, 248, 22);
-    outline: none; /* Removes default focus outline */
+    outline: none;
+    /* Removes default focus outline */
 }
 
 @media (max-width: 768px) {
@@ -94,8 +95,9 @@ nav {
         width: 50vw !important;
         margin: auto;
     }
-    
-    nav .btn, .nav-links {
+
+    nav .btn,
+    .nav-links {
         display: none;
     }
 
@@ -136,7 +138,8 @@ nav {
     }
 }
 
-#mobile-nav-section, .fa-bars {
+#mobile-nav-section,
+.fa-bars {
     display: none;
 }
 
@@ -168,7 +171,7 @@ nav {
     }
 
     .form-control {
-        width: 80vw !important; 
+        width: 80vw !important;
     }
 }
 
@@ -218,4 +221,40 @@ footer div {
     .social-icons {
         width: 80vw;
     }
+}
+
+/* -----------------------PAGE NOT FOUND------------------------------- */
+
+.pagenotfound {
+    min-height: 50vh;
+}
+
+.pagenotfound-hero-container {
+    height: 30vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    color: white;
+    text-align: center;
+    background: rgb(62, 17, 78)
+}
+
+.pagenotfound-hero-container h1 {
+    font-size: 5vw;
+}
+
+.pagenotfound-image {
+    min-width: 100%;
+    object-fit: cover !important;
+    opacity: 0.4;
+}
+
+.pagenotfound-text {
+    position: absolute;
+    width: 50vw;
+    z-index: 5 !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

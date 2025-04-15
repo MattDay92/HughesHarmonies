@@ -13,6 +13,7 @@ import Admin from './view/Admin'
 import StockArrangements from './view/StockArrangements'
 import SinglePage from './view/SinglePage.jsx';
 import SinglePageEdit from './view/SinglePageEdit.jsx';
+import PageNotFound from './view/PageNotFound.jsx';
 
 function App({ storage }) {
 
@@ -91,13 +92,14 @@ function App({ storage }) {
         <ScrollToTop />
         <Nav />
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/admin' element={<Admin data={data} setData={setData} getItems={getItems} storage={storage} />} />
-          <Route path='/stockarrangements' element={<StockArrangements data={data} voicings={voicings} tags={tags} showFunctions={showFunctions} />} />
-          <Route path='/arrangement/:id' element={<SinglePage data={data} getItems={getItems} />} />
-          <Route path='/arrangement/edit/:id' element={<SinglePageEdit data={data} getItems={getItems} storage={storage} />} />
+          <Route exact path='/' element={<Home />} />
+          <Route exact path='/about' element={<About />} />
+          <Route exact path='/contact' element={<Contact />} />
+          <Route exact path='/admin' element={<Admin data={data} setData={setData} getItems={getItems} storage={storage} />} />
+          <Route exact path='/stockarrangements' element={<StockArrangements data={data} voicings={voicings} tags={tags} showFunctions={showFunctions} />} />
+          <Route exact path='/arrangement/:id' element={<SinglePage data={data} getItems={getItems} />} />
+          <Route exact path='/arrangement/edit/:id' element={<SinglePageEdit data={data} getItems={getItems} storage={storage} />} />
+          <Route path={'*'} element={<PageNotFound />} />
         </Routes>
         <Footer />
       </BrowserRouter>
